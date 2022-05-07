@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(handle);
 
 function handle(req, res) {
-    res.write('Welcome to slughub! Ready to go?');
+    res.write('Welcome to slughub! Double push?');
     res.end();
 }
 
