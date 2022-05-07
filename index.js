@@ -8,7 +8,8 @@ const httpserver = http.Server(app);
 const io = socketio(httpserver);
 const gamedirectory = path.join(__dirname, "client");
 app.use(express.static(gamedirectory));
-httpserver.listen(3000);
+const port = process.env.PORT || 3000;
+httpserver.listen(port);
 
 // Prepare gameState
 let gameState = {
