@@ -1,11 +1,11 @@
+const express = require('express');
+const app = express();
 const http = require('http');
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 
-const server = http.createServer(handle);
+app.get('/', (req, res) => {
+  res.send('<h1>Hello Express? 😁</h1>');
+});
 
-function handle(req, res) {
-    res.write('Welcome to slughub! Default branch!');
-    res.end();
-}
-
-server.listen(port)
+server.listen(port);
