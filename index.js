@@ -52,7 +52,7 @@ io.on('connection', socket => {
 // Send regular updates to client
 function update() {
     movePlayers();
-    io.emit('update', gameState);
+    io.volatile.emit('update', gameState);
     setTimeout(update, 0);
 }
 update();

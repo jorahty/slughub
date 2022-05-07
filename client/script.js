@@ -9,19 +9,19 @@ buttons = document.querySelectorAll('button');
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('touchstart', () => {
         buttons[i].style.backgroundColor = '#484';
-        socket.emit('input', buttons[i].id);
+        socket.volatile.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('mousedown', () => {
         buttons[i].style.backgroundColor = '#484';
-        socket.emit('input', buttons[i].id);
+        socket.volatile.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('touchend', () => {
         buttons[i].style.backgroundColor = '#666';
-        socket.emit('input', buttons[i].id);
+        socket.volatile.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('mouseup', () => {
         buttons[i].style.backgroundColor = '#666';
-        socket.emit('input', buttons[i].id);
+        socket.volatile.emit('input', buttons[i].id);
     });
 }
 
