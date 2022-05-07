@@ -67,7 +67,7 @@ function movePlayers() {
     }
 }
 
-let speed = 1;
+let speed = 0.5;
 function movePlayer(player, key) {
     let p = player.position; 
     if (key == 'up' && p.y > 0) {
