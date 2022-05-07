@@ -15,11 +15,11 @@ body {
     max-width: 300px;
     margin: auto;
     min-height: 100vh;
+    background: #222;
 }
 
 canvas {
-    border: 1px solid #aaa;
-    background: #f0f0f0;
+    background: #666;
     width: 100%;
     image-rendering: pixelated;
 }
@@ -28,7 +28,7 @@ button {
     width: 90px;
     height: 90px;
     background: #f0f0f0;
-    border: 1px solid #aaa;
+    border: none;
     border-radius: 0;
     margin: 5px auto;
     display: block;
