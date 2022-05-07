@@ -5,7 +5,7 @@ const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello Express? 😁</h1>');
+    res.sendFile(__dirname + '/index.html');
 });
 
 server.listen(port);
