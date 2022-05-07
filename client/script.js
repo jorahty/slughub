@@ -8,19 +8,19 @@ canvas.height = 800;
 buttons = document.querySelectorAll('button');
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('touchstart', () => {
-        buttons[i].style.backgroundColor = 'yellow';
+        buttons[i].style.backgroundColor = '#484';
         socket.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('mousedown', () => {
-        buttons[i].style.backgroundColor = 'yellow';
+        buttons[i].style.backgroundColor = '#484';
         socket.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('touchend', () => {
-        buttons[i].style.backgroundColor = '#f0f0f0';
+        buttons[i].style.backgroundColor = '#666';
         socket.emit('input', buttons[i].id);
     });
     buttons[i].addEventListener('mouseup', () => {
-        buttons[i].style.backgroundColor = '#f0f0f0';
+        buttons[i].style.backgroundColor = '#666';
         socket.emit('input', buttons[i].id);
     });
 }
