@@ -1,0 +1,40 @@
+html {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    padding: 10px;
+    max-width: 300px;
+    margin: auto;
+    min-height: 100vh;
+}
+
+canvas {
+    border: 1px solid #aaa;
+    background: #f0f0f0;
+    width: 100%;
+    image-rendering: pixelated;
+}
+
+button {
+    width: 90px;
+    height: 90px;
+    background: #f0f0f0;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    margin: 5px auto;
+    display: block;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+}
