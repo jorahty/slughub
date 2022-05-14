@@ -9,23 +9,7 @@ socket.on('connect', () => {
 })
 
 // upon recieving update from server, update gamestate
-
-// ███████
-// allow user to modify gamestate (temporary)
-let add = document.getElementById('add').onclick = () => {
-    let id = document.querySelector('input').value;
-    gamestate[id] = {
-        color: Math.random() * 0xffffff,
-        x: -3 + Math.random() * 6,
-        y: -3 + Math.random() * 6,
-        rotation: Math.random() * 2 * Math.PI
-    };
-};
-let remove = document.getElementById('remove').onclick = () => {
-    let id = document.querySelector('input').value;
-    delete gamestate[id];
-};
-
+socket.on('update', gs => { gamestate = gs; });
 
 // create scene
 let scene = new THREE.Scene();
