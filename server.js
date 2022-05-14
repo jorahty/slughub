@@ -10,6 +10,12 @@ app.use(express.static(path.join(__dirname, "client")));
 const port = process.env.PORT || 3000;
 httpserver.listen(port);
 
+// balance
+const BROADCAST_RATE = 30;
+const TICK_RATE = 30;
+const ROTATE_SPEED = 0.1;
+const TRANSLATE_SPEED = 0.1;
+
 // prepare gamestate
 let gamestate = {};
 
@@ -18,8 +24,6 @@ let controls = {}
 
 // listen for connection
 io.on('connection', socket => {
-
-    console.log(`${socket.id} has connected`);
 
     // add user to gamestate
     gamestate[socket.id] = {
@@ -53,16 +57,16 @@ io.on('connection', socket => {
 });
 
 // emit regular updates to all clients
-setInterval(() => { io.volatile.emit('update', gamestate); }, 1000 / 30);
+setInterval(() => { io.volatile.emit('update', gamestate); }, 1000 / BROADCAST_RATE);
 
 // step/simulate the gamestate forward in time (based on input)
-setInterval(tick, 1000 / 30);
+setInterval(tick, 1000 / TICK_RATE);
 function tick() {
     for (let id in gamestate) { // for every user
-        if (controls[id].isRotating) gamestate[id].rotation += 0.1;
+        if (controls[id].isRotating) gamestate[id].rotation += ROTATE_SPEED;
         if (controls[id].isTranslating) {
-            gamestate[id].x -= 0.1 * Math.sin(gamestate[id].rotation);
-            gamestate[id].y += 0.1 * Math.cos(gamestate[id].rotation);
+            gamestate[id].x -= TRANSLATE_SPEED * Math.sin(gamestate[id].rotation);
+            gamestate[id].y += TRANSLATE_SPEED * Math.cos(gamestate[id].rotation);
         }
     }
 }
