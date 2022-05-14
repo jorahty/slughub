@@ -13,6 +13,9 @@ httpserver.listen(port);
 // prepare gamestate
 let gamestate = {};
 
+// prepare controls
+let controls = {}
+
 // listen for connection
 io.on('connection', socket => {
 
@@ -27,13 +30,37 @@ io.on('connection', socket => {
     };
 
     // track user controls
+    controls[socket.id] = {
+        isRotating: false,
+        isTranslating: false
+    }
 
     // listen for disconnection
     socket.on('disconnect', () => {
         delete gamestate[socket.id];
+        delete controls[socket.id];
     });
 });
 
 
 // emit regular updates to all clients
-setInterval(() => { io.volatile.emit('update', gamestate); }, 3000);
+setInterval(() => { io.volatile.emit('update', gamestate); }, 1000 / 10);
+
+// step/simulate the gamestate forward in time (based on input)
+setInterval(tick, 1000 / 30);
+
+function tick() {
+
+    for (let id in gamestate) { // for every user
+
+        gamestate[id].rotation += 0.1;
+
+    }
+
+    // move if controls are active
+    // if (rotating) me.rotation += 0.1;
+    // if (translating) {
+    //     me.x -= 0.1 * Math.sin(me.rotation);
+    //     me.y += 0.1 * Math.cos(me.rotation);
+    // }
+}

@@ -26,7 +26,7 @@ document.body.appendChild(renderer.domElement);
 // define player geometry
 let geometry = new THREE.ConeGeometry(0.3);
 
-// define background & add to scence
+// define background & add to scene
 let bg_geometry = new THREE.PlaneGeometry(15, 15);
 let bg = new THREE.Mesh(bg_geometry);
 let loader = new THREE.TextureLoader();
