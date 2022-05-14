@@ -1,9 +1,12 @@
 let gamestate = {}; // gamestate is dictionary of players
 
-
 // establish connection to server
-
-let myid = 'a'; // temporary ███████
+let socket = io();
+let myid = undefined;
+socket.on('connect', () => {
+    console.log(socket.id);
+    myid = socket.id;
+})
 
 // upon recieving update from server, update gamestate
 

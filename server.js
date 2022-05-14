@@ -9,3 +9,10 @@ const io = socketio(httpserver);
 app.use(express.static(path.join(__dirname, "client")));
 const port = process.env.PORT || 3000;
 httpserver.listen(port);
+
+// Liste for connection
+io.on('connection', socket => {
+
+    console.log(`${socket.id} has connected`);
+    
+})
