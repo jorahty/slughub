@@ -22,6 +22,19 @@ camera.position.z = 10;
 let renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(512, 512);
 document.body.appendChild(renderer.domElement);
+scale();
+
+function scale() { // scale the renderer
+    if (window.innerHeight < window.innerWidth) {
+        renderer.domElement.style.width = '516px';
+        renderer.domElement.style.height = '516px';
+        return;
+    }
+    renderer.domElement.style.width = '100vw';
+    renderer.domElement.style.height = 'auto';
+}
+window.onresize = scale;
+
 
 // define player geometry
 let geometry = new THREE.ConeGeometry(0.3);
