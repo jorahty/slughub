@@ -10,9 +10,10 @@ let gamestate = {}; // gamestate is dictionary of players
 let add = document.getElementById('add').onclick = () => {
     let id = document.querySelector('input').value;
     gamestate[id] = {
+        color: Math.random() * 0xffffff,
         x: -3 + Math.random() * 6,
         y: -3 + Math.random() * 6,
-        color: Math.random() * 0xffffff
+        rotation: Math.random() * 2 * Math.PI
     };
 };
 let remove = document.getElementById('remove').onclick = () => {
@@ -61,6 +62,7 @@ function update() {
         let mesh = new THREE.Mesh(geometry, material);
         mesh.position.x = gamestate[id].x;
         mesh.position.y = gamestate[id].y;
+        mesh.rotation.z = gamestate[id].rotation;
         scene.add(mesh);
 
         meshes[id] = {mesh, material, geometry};
@@ -77,7 +79,39 @@ function update() {
     }
 }
 
-// configure input controls
+// configure controls to listen for input
+createControls();
+
+// createControls
+function createControls() {
+
+    let rotate = document.createElement('button');
+    let translate = document.createElement('button');
+
+    rotate.innerText = 'rotate';
+    translate.innerText = 'translate';
+
+    // listen for rotate input
+    rotate.addEventListener('mousedown', () => { input(true, true) } )
+    rotate.addEventListener('mouseup', () => { input(false, true) } )
+    
+    // listen for translate input
+    translate.addEventListener('mousedown', () => { input(true, false) } )
+    translate.addEventListener('mouseup', () => { input(false, false) } )
+
+    document.body.appendChild(rotate);
+    document.body.appendChild(translate);
+}
 
 // upon user input, send input to server
+function input(isDown, isRotate) {
+
+    let status = isDown ? "down" : "up";
+    let control = isRotate ? "rotate" : "translate";
+    console.log(`${control} is ${status}`);
+
+    // rotating = isDown && isRotate
+    // translating = isDown && !isRotate
+}
+
 
