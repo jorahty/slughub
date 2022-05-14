@@ -1,25 +1,30 @@
 body {
     margin: 30px auto;
     width: max-content;
-    background: #222;
+    background: #282c34;
 }
 
-input, button {
-    color: #999;
-    padding: 8px;
-    background: #444;
-    margin-right: 10px;
-    border: 2px solid transparent;
+canvas, button {
+    border: 2px solid #000;
+    border-radius: 16px;
 }
 
-input:focus {
-    outline: none;
+div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
 }
 
 button {
+    color: #999;
+    padding: 8px;
+    background: #20232a;
     cursor: pointer;
+    width: 100%;
+    height: 100px;
 }
 
 button:active {
-    border: 2px solid #666;
+    background: #20232a;
 }
