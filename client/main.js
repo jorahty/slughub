@@ -97,7 +97,7 @@ function tween(src, dst, drag) {
     return src + (dst - src) / drag;
 }
 
-// temporary ███████
+// ██ used for client-side prediction (beta)
 let rotating = false;
 let translating = false;
 
@@ -129,17 +129,11 @@ function createControls() {
 // upon user input, send input to server
 function input(isDown, isRotate) {
 
-    // confirm in console
-    // let status = isDown ? "down" : "up";
-    // let control = isRotate ? "rotate" : "translate";
-    // console.log(`${control} is ${status}`);
-
-    // temporary ███████
-    // instead of sending input to server,
-    // toggle global variables
+    // ██ used for client-side prediction (beta)
     rotating = isDown && isRotate
     translating = isDown && !isRotate
 
+    // Get single-char input code
     let code;
     if (isDown && isRotate) code = 'R'; // r is down
     if (isDown && !isRotate) code = 'T'; // t is down
@@ -149,19 +143,12 @@ function input(isDown, isRotate) {
     socket.volatile.emit('input', code);
 }
 
-// ███████
-// temporary (this will eventually happen on server)
+// ██ used for client-side prediction (beta)
 // step/simulate the gamestate forward in time (based on input)
-
 setInterval(tick, 1000 / 30);
-
 function tick() {
-
     let me = gamestate[myid];
-
     if (!me) return;
-
-    // move if controls are active
     if (rotating) me.rotation += 0.09;
     if (translating) {
         me.x -= 0.09 * Math.sin(me.rotation);
