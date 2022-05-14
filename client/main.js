@@ -3,10 +3,7 @@ let gamestate = {}; // gamestate is dictionary of players
 // establish connection to server
 let socket = io();
 let myid = undefined;
-socket.on('connect', () => {
-    console.log(socket.id);
-    myid = socket.id;
-})
+socket.on('connect', () => { myid = socket.id; })
 
 // upon recieving update from server, update gamestate
 socket.on('update', gs => { gamestate = gs; });
@@ -127,16 +124,20 @@ function createControls() {
     translate.innerText = 'translate';
 
     // listen for rotate input
-    rotate.addEventListener('mousedown', () => { input(true, true) } )
-    rotate.addEventListener('touchstart', () => { input(true, true) } )
-    rotate.addEventListener('mouseup', () => { input(false, true) } )
-    rotate.addEventListener('touchend', () => { input(false, true) } )
+    rotate.addEventListener('mousedown', () => { input(true, true); });
+    rotate.addEventListener('touchstart', () => { input(true, true); });
+    rotate.addEventListener('mouseup', () => { input(false, true); });
+    rotate.addEventListener('touchend', () => { input(false, true); });
+    document.addEventListener('keydown', (e) => { if (e.key == 'r') input(true, true); });
+    document.addEventListener('keyup', (e) => { if (e.key == 'r') input(false, true); });
     
     // listen for translate input
-    translate.addEventListener('mousedown', () => { input(true, false) } )
-    translate.addEventListener('touchstart', () => { input(true, false) } )
-    translate.addEventListener('mouseup', () => { input(false, false) } )
-    translate.addEventListener('touchend', () => { input(false, false) } )
+    translate.addEventListener('mousedown', () => { input(true, false); });
+    translate.addEventListener('touchstart', () => { input(true, false); });
+    translate.addEventListener('mouseup', () => { input(false, false); });
+    translate.addEventListener('touchend', () => { input(false, false); });
+    document.addEventListener('keydown', (e) => { if (e.key == 't') input(true, false); });
+    document.addEventListener('keyup', (e) => { if (e.key == 't') input(false, false); });
 
     // append buttons to dom
     let div = document.createElement('div');
