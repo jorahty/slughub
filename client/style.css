@@ -34,8 +34,9 @@ button {
     width: 100%;
     height: 10vh;
     margin: 20px;
+    font-size: x-large;
 }
 
 button:active {
-    background: #20232a;
+    background: #282c34;
 }
