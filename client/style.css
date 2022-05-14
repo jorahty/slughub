@@ -34,9 +34,9 @@ button {
     width: 100%;
     height: 10vh;
     margin: 20px;
-    font-size: x-large;
+    font-size: 24px;
 }
 
-button:active {
-    background: #282c34;
+button:focus {
+    outline: none;
 }

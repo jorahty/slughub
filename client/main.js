@@ -112,14 +112,14 @@ let rotating = false;
 let translating = false;
 
 // configure controls to listen for input
+let rotate = document.createElement('button');
+let translate = document.createElement('button');
 createControls();
 
 // createControls
 function createControls() {
 
     // create buttons
-    let rotate = document.createElement('button');
-    let translate = document.createElement('button');
     rotate.innerText = 'rotate';
     translate.innerText = 'translate';
 
@@ -153,12 +153,25 @@ function input(isDown, isRotate) {
     rotating = isDown && isRotate
     translating = isDown && !isRotate
 
-    // Get single-char input code
-    let code;
-    if (isDown && isRotate) code = 'R'; // r is down
-    if (isDown && !isRotate) code = 'T'; // t is down
-    if (!isDown && isRotate) code = 'r'; // r is up
-    if (!isDown && !isRotate) code = 't'; // t is up
+    let code; // Get single-char input code
+
+    if (isDown) {
+        if (isRotate) {
+            code = 'R'; // rotate is down
+            rotate.style.background = '#282c34'
+        } else {
+            code = 'T'; // translate is down
+            translate.style.background = '#282c34'
+        }
+    } else {
+        if (isRotate) {
+            code = 'r'; // rotate is up
+            rotate.style.background = '#20232a'
+        } else {
+            code = 't'; // translate is up
+            translate.style.background = '#20232a'
+        }
+    }
 
     socket.volatile.emit('input', code);
 }
