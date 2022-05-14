@@ -53,7 +53,7 @@ io.on('connection', socket => {
 });
 
 // emit regular updates to all clients
-setInterval(() => { io.volatile.emit('update', gamestate); }, 1000 / 10);
+setInterval(() => { io.volatile.emit('update', gamestate); }, 1000 / 30);
 
 // step/simulate the gamestate forward in time (based on input)
 setInterval(tick, 1000 / 30);
