@@ -115,15 +115,21 @@ function createControls() {
 
     // listen for rotate input
     rotate.addEventListener('mousedown', () => { input(true, true) } )
+    rotate.addEventListener('touchstart', () => { input(true, true) } )
     rotate.addEventListener('mouseup', () => { input(false, true) } )
+    rotate.addEventListener('touchend', () => { input(false, true) } )
     
     // listen for translate input
     translate.addEventListener('mousedown', () => { input(true, false) } )
+    translate.addEventListener('touchstart', () => { input(true, false) } )
     translate.addEventListener('mouseup', () => { input(false, false) } )
+    translate.addEventListener('touchend', () => { input(false, false) } )
 
     // append buttons to dom
-    document.body.appendChild(rotate);
-    document.body.appendChild(translate);
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+    div.appendChild(rotate);
+    div.appendChild(translate);
 }
 
 // upon user input, send input to server
