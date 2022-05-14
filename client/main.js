@@ -98,8 +98,8 @@ function tween(src, dst, drag) {
 }
 
 // temporary ███████
-// let rotating = false;
-// let translating = false;
+let rotating = false;
+let translating = false;
 
 // configure controls to listen for input
 createControls();
@@ -137,8 +137,8 @@ function input(isDown, isRotate) {
     // temporary ███████
     // instead of sending input to server,
     // toggle global variables
-    // rotating = isDown && isRotate
-    // translating = isDown && !isRotate
+    rotating = isDown && isRotate
+    translating = isDown && !isRotate
 
     let code;
     if (isDown && isRotate) code = 'R'; // r is down
@@ -153,18 +153,18 @@ function input(isDown, isRotate) {
 // temporary (this will eventually happen on server)
 // step/simulate the gamestate forward in time (based on input)
 
-// setInterval(tick, 1000 / 30);
+setInterval(tick, 1000 / 30);
 
-// function tick() {
+function tick() {
 
-//     let me = gamestate[myid];
+    let me = gamestate[myid];
 
-//     if (!me) return;
+    if (!me) return;
 
-//     // move if controls are active
-//     if (rotating) me.rotation += 0.1;
-//     if (translating) {
-//         me.x -= 0.1 * Math.sin(me.rotation);
-//         me.y += 0.1 * Math.cos(me.rotation);
-//     }
-// }
+    // move if controls are active
+    if (rotating) me.rotation += 0.09;
+    if (translating) {
+        me.x -= 0.09 * Math.sin(me.rotation);
+        me.y += 0.09 * Math.cos(me.rotation);
+    }
+}
