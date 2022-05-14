@@ -1,6 +1,6 @@
 body {
     margin: 30px auto;
-    width: 500px;
+    width: max-content;
     background: #222;
 }
 

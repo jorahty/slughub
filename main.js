@@ -32,19 +32,27 @@ let camera = new THREE.PerspectiveCamera();
 camera.position.z = 10;
 
 // create renderer
-let renderer = new THREE.WebGLRenderer();
-renderer.setSize(400, 400);
+let renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(512, 512);
 document.body.appendChild(renderer.domElement);
 
 // define player geometry
-let geometry = new THREE.ConeGeometry(0.5);
+let geometry = new THREE.ConeGeometry(0.3);
 
-// define background
-var loader = new THREE.TextureLoader();
-var bg_geometry = new THREE.PlaneGeometry(15, 15);
-var bg_material = new THREE.MeshBasicMaterial({ map: loader.load('bg.jpg') });
-var bg = new THREE.Mesh(bg_geometry, bg_material);
+// define & render the background
+let bg_geometry = new THREE.PlaneGeometry(15, 15);
+let bg = new THREE.Mesh(bg_geometry);
+let loader = new THREE.TextureLoader();
+loader.load('grid.png', (texture) => {
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(8, 8);
+    bg.material.map = texture;
+    bg.material.needsUpdate = true;
+});
 scene.add(bg);
+
+
 
 // continuously render the scene from the camera
 let meshes = {}; // need to keep track of meshes in scene
@@ -63,7 +71,7 @@ function animate() {
 // update scene based on gamestate
 function update() {
 
-    for (let id in gamestate) { // for each player
+    for (let id in gamestate) { // for each player in gamestate
 
         // add player if not already in scene
         if (id in meshes == false) {
@@ -77,14 +85,14 @@ function update() {
 
         // focus camera if player has myid
         if (id == myid) {
-            camera.position.x = gamestate[id].x;
-            camera.position.y = gamestate[id].y;
+            camera.position.x = tween(camera.position.x, gamestate[id].x, 8);
+            camera.position.y = tween(camera.position.y, gamestate[id].y, 8);
         }
 
         // update player position & rotation
-        meshes[id].mesh.position.x = gamestate[id].x;
-        meshes[id].mesh.position.y = gamestate[id].y;
-        meshes[id].mesh.rotation.z = gamestate[id].rotation;
+        meshes[id].mesh.position.x = tween(meshes[id].mesh.position.x, gamestate[id].x, 4);
+        meshes[id].mesh.position.y = tween(meshes[id].mesh.position.y, gamestate[id].y, 4);
+        meshes[id].mesh.rotation.z = tween(meshes[id].mesh.rotation.z, gamestate[id].rotation, 4);
     }
 
     // remove abscent players
@@ -96,6 +104,12 @@ function update() {
         renderer.renderLists.dispose();
         delete meshes[id];
     }
+}
+
+function tween(src, dst, drag) {
+    // instead of returning dst outright,
+    // return point 'on the way to' dst from src
+    return src + (dst - src) / drag;
 }
 
 // temporary ███████
@@ -147,7 +161,7 @@ function input(isDown, isRotate) {
 // temporary (this will eventually happen on server)
 // step/simulate the gamestate forward in time (based on input)
 
-setInterval(tick, 1000 / 4);
+setInterval(tick, 1000 / 30);
 
 function tick() {
 
@@ -156,9 +170,9 @@ function tick() {
     if (!me) return;
 
     // move if controls are active
-    if (rotating) me.rotation += 0.3;
+    if (rotating) me.rotation += 0.1;
     if (translating) {
-        me.x -= 0.3 * Math.sin(me.rotation);
-        me.y += 0.3 * Math.cos(me.rotation);
+        me.x -= 0.1 * Math.sin(me.rotation);
+        me.y += 0.1 * Math.cos(me.rotation);
     }
 }
