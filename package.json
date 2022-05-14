@@ -1,0 +1,24 @@
+{
+  "name": "slughub",
+  "version": "1.0.0",
+  "description": "a virtual space where users can move",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorahty/slughub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorahty/slughub/issues"
+  },
+  "homepage": "https://github.com/jorahty/slughub#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.0"
+  }
+}
