@@ -39,7 +39,7 @@ document.body.appendChild(renderer.domElement);
 // define player geometry
 let geometry = new THREE.ConeGeometry(0.3);
 
-// define & render the background
+// define background & add to scence
 let bg_geometry = new THREE.PlaneGeometry(15, 15);
 let bg = new THREE.Mesh(bg_geometry);
 let loader = new THREE.TextureLoader();
@@ -51,8 +51,6 @@ loader.load('grid.png', (texture) => {
     bg.material.needsUpdate = true;
 });
 scene.add(bg);
-
-
 
 // continuously render the scene from the camera
 let meshes = {}; // need to keep track of meshes in scene
